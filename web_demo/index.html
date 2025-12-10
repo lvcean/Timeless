@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless - Capture Every Moment</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <!-- === LANDING PAGE === -->
+    <div id="landing-page">
+
+        <!-- Navbar -->
+        <nav
+            style="padding: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div style="font-weight: 800; font-size: 1.5rem; color: var(--primary-dark);">Timeless.</div>
+            <button onclick="openLogin()"
+                style="background: white; border: 1px solid #eee; padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--primary-dark); transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">网页版登录</button>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-logo">Timeless</h1>
+            <p class="hero-subtitle">
+                不仅仅是记录，更是对生活的致敬。<br>
+                极简设计，极致体验，让每一个瞬间都永恒。
+            </p>
+
+            <a href="./Timeless.apk" class="btn-download-large" style="font-size: 1.2rem; padding: 20px 40px;" download>
+                <span class="material-icons-outlined">android</span>
+                下载 Android 版
+            </a>
+
+            <div style="margin-top: 60px; opacity: 0.6; animation: float 3s infinite ease-in-out;">
+                <span class="material-icons-outlined" style="font-size: 30px;">keyboard_arrow_down</span>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-container">
+            <div class="feature-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon"><span class="material-icons-outlined">cloud_sync</span></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">云端实时同步</h3>
+                    <p style="color: #666; line-height: 1.6;">无论是在手机还是网页，您的数据永远保持最新。毫秒级同步，无感备份。</p>
+                </div>
+
+                <div class="feature-card scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="feature-icon"><span class="material-icons-outlined">palette</span></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">极致视觉设计</h3>
+                    <p style="color: #666; line-height: 1.6;">全新薄荷绿主题，配合玻璃拟态与流畅动效，带来令人愉悦的视觉享受。</p>
+                </div>
+
+                <div class="feature-card scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="feature-icon"><span class="material-icons-outlined">security</span></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">隐私安全至上</h3>
+                    <p style="color: #666; line-height: 1.6;">基于 Supabase 的企业级安全架构，您的生活点滴，只有您自己能看到。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Hero -->
+        <section id="download" class="download-section">
+            <h2 style="font-size: 3rem; margin-bottom: 20px; color: var(--primary-dark);">即刻开始体验</h2>
+            <p style="color: #666; margin-bottom: 50px; font-size: 1.2rem;">加入成千上万的用户，开始您的 Timeless 之旅。</p>
+
+            <a href="./Timeless.apk" class="btn-download-large" download>
+                <span class="material-icons-outlined" style="font-size: 1.2em;">download</span>
+                免费下载 APK
+            </a>
+
+            <p style="margin-top: 30px; color: #999; font-size: 0.9rem;">
+                适用于 Android 8.0+ • 无广告 • 永久免费
+            </p>
+        </section>
+
+        <footer style="text-align: center; padding: 40px; color: #aaa; font-size: 0.9rem;">
+            &copy; 2025 Timeless. Designed with ❤️ by DeepMind.
+        </footer>
+    </div>
+
+    <!-- === WEB APP CONTAINER (Hidden initially) === -->
+    <div id="web-app-container">
+        <header style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+            <h1 style="color:var(--primary-dark); font-size:2rem;">Timeless Web</h1>
+            <div style="display:flex; gap:15px; align-items:center;">
+                <span id="current-user" style="color:#666; font-size:0.9rem;"></span>
+                <button onclick="logout()"
+                    style="background:none; border:1px solid #ddd; padding:8px 16px; border-radius:50px; cursor:pointer;">退出</button>
+            </div>
+        </header>
+
+        <div id="event-grid" class="grid"></div>
+
+        <div onclick="openAddModal()"
+            style="position:fixed; bottom:40px; right:40px; width:60px; height:60px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; box-shadow:0 10px 30px rgba(82,183,136,0.5); cursor:pointer; transition:0.3s;"
+            onmouseover="this.style.transform='scale(1.1) rotate(90deg)'" onmouseout="this.style.transform='scale(1)'">
+            <span class="material-icons-outlined">add</span>
+        </div>
+    </div>
+
+    <!-- === MODALS === -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2 style="color:var(--primary-dark)">欢迎回来</h2>
+            <div id="step-email">
+                <input type="email" id="email-input" placeholder="邮箱地址">
+                <button class="btn-primary" onclick="sendOtp()" id="send-btn">发送验证码</button>
+                <div style="margin-top:15px; cursor:pointer; color:#999; font-size:0.9rem;" onclick="closeLogin()">我想先看看
+                    &larr;</div>
+            </div>
+            <div id="step-code" style="display:none">
+                <input type="text" id="code-input" placeholder="验证码" maxlength="8"
+                    style="text-align:center; letter-spacing:5px;">
+                <button class="btn-primary" onclick="verifyOtp()" id="verify-btn">登录</button>
+                <div style="margin-top:10px; color:#aaa; cursor:pointer;" onclick="showMsg('验证码已发送至您的邮箱')">没收到？</div>
+            </div>
+            <p id="login-msg" style="color:red; margin-top:10px; font-size:0.9rem;"></p>
+        </div>
+    </div>
+
+    <div id="modal">
+        <div class="login-box" style="text-align:left;">
+            <h3>新建事件</h3>
+            <input type="text" id="new-name" placeholder="事件名称">
+
+            <div style="margin:20px 0; max-height:150px; overflow-y:auto; display:grid; grid-template-columns:repeat(5,1fr); gap:10px;"
+                id="icon-selector"></div>
+
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <div onclick="selectColor('#52B788', this)" class="color-dot active"
+                    style="width:30px; height:30px; border-radius:50%; background:#52B788; border:2px solid transparent; cursor:pointer;">
+                </div>
+                <div onclick="selectColor('#6366f1', this)" class="color-dot"
+                    style="width:30px; height:30px; border-radius:50%; background:#6366f1; border:2px solid transparent; cursor:pointer;">
+                </div>
+                <div onclick="selectColor('#ef4444', this)" class="color-dot"
+                    style="width:30px; height:30px; border-radius:50%; background:#ef4444; border:2px solid transparent; cursor:pointer;">
+                </div>
+                <div onclick="selectColor('#f59e0b', this)" class="color-dot"
+                    style="width:30px; height:30px; border-radius:50%; background:#f59e0b; border:2px solid transparent; cursor:pointer;">
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="submitNewEvent()">创建</button>
+            <button onclick="closeModal()"
+                style="width:100%; padding:10px; border:none; background:none; margin-top:10px; cursor:pointer; color:#999;">取消</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

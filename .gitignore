@@ -1,0 +1,35 @@
+
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+.gradle/
+.idea/
+*.iml
+local.properties
+
+# Log Files
+*.log
+
+# Keystores
+*.jks
+*.keystore
+
+# Google Services
+google-services.json
+
+# Web Demo APK exception (allow Timeless.apk in web_demo folder)
+!web_demo/Timeless.apk
