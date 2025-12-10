@@ -70,7 +70,7 @@ Timeless/
 
 ### ❤️ 关于开发者
 
-Designed & Developed by **Lvcean**.
+Designed & Developed by **Lvcean YANAOPENG**.
 致力于创造美观且实用的软件体验。
 
 Copyright © 2025 Timeless. All rights reserved.
